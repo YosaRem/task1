@@ -20,13 +20,13 @@ class TraceFormatter:
     @staticmethod
     def format_trace(trace):
         for line in trace:
-            line = line[3:]
+            line = line[4:]
             if len(line) < 1:
                 break
-            if line[1] == "*":
+            if line[0] == "*":
+                yield " * * * ", " * * * "
                 break
             splited_line = line.split(" ")
-            domain = splited_line[1]
-            ip = splited_line[2].strip("(").strip(")")
+            domain = splited_line[0]
+            ip = splited_line[1].strip("(").strip(")")
             yield domain, ip
-        yield " * * * ", " * * * "
