@@ -1,10 +1,10 @@
 import re
 
 
-class IPDomainNameFormatter:
+class IPDomainNameChecker:
     @staticmethod
     def check(address):
-        if not (IPDomainNameFormatter.check_ip(address) or IPDomainNameFormatter.check_domain_name(address)):
+        if not (IPDomainNameChecker.check_ip(address) or IPDomainNameChecker.check_domain_name(address)):
             raise Exception("Invalid address")
 
     @staticmethod
@@ -23,9 +23,10 @@ class TraceFormatter:
             line = line[3:]
             if len(line) < 1:
                 break
-            if line[0] == "*":
+            if line[1] == "*":
                 break
             splited_line = line.split(" ")
             domain = splited_line[1]
             ip = splited_line[2].strip("(").strip(")")
             yield domain, ip
+        yield " * * * ", " * * * "

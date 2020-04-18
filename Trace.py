@@ -1,5 +1,5 @@
 import os
-from Formatters import IPDomainNameFormatter
+from Formatters import IPDomainNameChecker
 from Formatters import TraceFormatter
 
 
@@ -7,7 +7,7 @@ class Trace:
     command_pattern = "traceroute "
 
     def __init__(self, address):
-        IPDomainNameFormatter.check(address)
+        IPDomainNameChecker.check(address)
         self.address = address
         self.trace = self.get_row_trace()
 
@@ -15,6 +15,8 @@ class Trace:
         trace = os.popen(self.command_pattern + self.address).read()
         return trace.split("\n")
 
-    def print_trace(self):
-        for d, i in TraceFormatter.format_trace(self.trace[1:]):
-            print(d + " " + i)
+    def get_trace(self):
+        i = 1
+        for dom, ip in TraceFormatter.format_trace(self.trace[2:]):
+            yield [i, dom, ip]
+            i += 1

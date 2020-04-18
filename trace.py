@@ -1,6 +1,7 @@
 import argparse
 
 from Trace import Trace
+from Builder import Builder
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
     parser.add_argument("address", type=str, help="IP or domain name")
     args = parser.parse_args()
     tr = Trace(args.address)
-    tr.print_trace()
+    Builder(tr).print_trace()
 
 
 if __name__ == "__main__":
