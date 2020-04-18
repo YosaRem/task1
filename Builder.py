@@ -17,6 +17,8 @@ class Builder:
         return [number, ip, finder.get_as(ip), finder.get_country(ip), finder.get_provider(ip)]
 
     def print_trace(self):
+        print("{:^4}| {:^16}| {:^10} | {:^30} | {:^20} |".format("№", "IP", "AS", "Country", "Provider"))
+        print("-" * 92)
         for line in self.build_trace():
             if line[1] == " * * * ":
                 print("{:^4}| {:^16}| {:^10} | {:^30} | {:^20} |".format(line[0], line[1], "None", "None", "None"))
